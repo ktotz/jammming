@@ -1,24 +1,23 @@
-import React from "react";
-import Track from "../Track/Track";
+import React from 'react';
+import './TrackList.css';
 
-const Tracklist = (props) => {
-
+function TrackList({ tracks, onRemoveTrack })
+{
   return (
-    <div className="relative py-5 text-white font-light font-['Inter']">
-      {props.tracks.map((track, id) => (
-        <div key={id}>
-          <Track
-            key={track.uri}
-            track={track}
-            isAdd={props.isAdd}
-            onAdd={props.onAdd}
-            onRemove={props.onRemove}
-          />
-          <hr className="my-2 border-t border-gray-500" />
+    <div className="Tracklist">
+      
+      {tracks.map((track) => (
+        <div className="Track" key={track.id}>
+          <div className="Track-information">
+            <p><span style={{ fontWeight: 'bold' }}>{track.name}</span> | {track.artist} | {track.album}</p>
+          </div>
+          <button className="Track-action Track-remove" onClick={() => onRemoveTrack(track)}>
+          -
+          </button>
         </div>
       ))}
     </div>
   );
-};
+}
 
-export default Tracklist;
+export default TrackList;

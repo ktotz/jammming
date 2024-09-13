@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f4f4f4;
+    background-color: darkgrey;
   }
   
   /* Main Body Container */
@@ -12,6 +12,7 @@ body {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    background-color: darkgrey;
   }
   
   /* Save Playlist Button */
@@ -60,35 +61,6 @@ body {
     font-size: 24px;
     font-weight: bold;
     border-bottom: 2px solid teal;
-  }
-  
-  /* Search Bar */
-  .search-bar {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-  }
-  
-  .search-bar input {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .search-bar button {
-    background-color: teal;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  .search-bar button:hover {
-    background-color: #006666;
   }
   
   /* Search Results */

@@ -1,49 +1,32 @@
-import React, {useState} from "react";
-import './SearchBar.css';
+import React, { useState } from 'react';
+import './SearchBar.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+function SearchBar({ onSearch })
+{
+  const [ searchTerm, setSearchTerm ] = useState('');
 
-const SearchBar = (props) => {
-  // State Variables
-  const [searchQuery, setSearchQuery] = useState("");
-
-  // Function to update search query variable
-  const handleSearchQuery = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  // Function to handle the form submission
-  const handleSubmit = (e) => {
+  const handleSearch = (e) =>
+  {
     e.preventDefault();
-    if (!searchQuery) {
-      alert("Search query is empty!");
-    } else {
-      props.getSearchResults(searchQuery); // Call the getSearchResults function from App.js
-    }
-    setSearchQuery(""); // Reset the search query
-  };
-
-  // Function to handle the enter key press
-  const handleEnterKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSubmit(e);
+    if (searchTerm)
+    {
+      onSearch(searchTerm); // Call the onSearch prop with the search term
     }
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-          <div className="search-bar">
-              <input
-                  className="search-bar-input" 
-                  type="text"
-                  placeholder="Search for a song, artist, or album..."
-                  value={searchQuery}
-                  onChange={handleSearchQuery}
-                  onKeyDown={handleEnterKeyPress}
-              />
-          </div>
-      </form>
-    </>
+    <div className="search-bar">
+      <input
+        placeholder="Enter a song, album, or artist"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <button className="SearchButton" onClick={handleSearch}>
+        <FontAwesomeIcon icon={faSearch} /> Search
+      </button>
+    </div>
   );
-};
+}
 
 export default SearchBar;

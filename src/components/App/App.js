@@ -1,97 +1,94 @@
+
 import React, { useState, useEffect } from 'react';
-import './App.css';
-import Header from '../Header/header';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-
-import { performSearch, handleSavePlaylist, addTrackToPlaylist, removeTrackFromPlaylist } from '../../helpers';
-
+import './App.css';
 import Spotify from '../../util/Spotify';
 
-const App = () => {
-  // State Variables
-  const [searchPerformed, setSearchPerformed] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
-  const [playlistName, setPlaylistName] = useState("");
-  const [playlistTracks, setPlaylistTracks] = useState([]);
+function App()
+{
+  const [ playlistURIs, setPlaylistURIs ] = useState([]);
+  const [ playlistName, setPlaylistName ] = useState('My Playlist');
+  const [ playlistTracks, setPlaylistTracks ] = useState([]);
+  const [ searchResults, setSearchResults ] = useState([]);
+  const [ isTokenReady, setIsTokenReady ] = useState(false);
 
-  // Initialize Spotify API with access token
-  useEffect(() => {
-    Spotify.requestAccessToken();
+  useEffect(() =>
+  {
+    // Call getAccessToken and update the state based on whether a token was successfully retrieved
+    const token = Spotify.getAccessToken();
+    if (token)
+    {
+      setIsTokenReady(true); // Update state to indicate token is ready
+    }
   }, []);
 
-  // Update the playlist name
-  const updatePlaylistName = (value) => {
-    setPlaylistName(value);
-  };
-
-  // Get Search Results
-  const getSearchResults = async (searchQuery) => {
-    setSearchPerformed(true);
-    try {
-      await performSearch(Spotify, searchQuery, setSearchResults);
-    } catch (error) {
-      alert('Error during search: ' + error);
+  const addTrack = (track) =>
+  {
+    if (!playlistTracks.some((playlistTrack) => playlistTrack.id === track.id))
+    {
+      setPlaylistTracks([ ...playlistTracks, track ]);
+      setPlaylistURIs([ ...playlistURIs, track.uri ]);
     }
-  }
-
-  // Add a track to the playlist
-  const addTrack = (track) => {
-    addTrackToPlaylist(track, playlistTracks, setPlaylistTracks);
   };
 
-  // Remove a track from the playlist
-  const removeTrack = (track) => {
-    removeTrackFromPlaylist(track, setPlaylistTracks);
+  const removeTrack = (track) =>
+  {
+    // Filter out the track with a unique property
+    const updatedPlaylist = playlistTracks.filter((playlistTrack) => playlistTrack.id !== track.id);
+    setPlaylistTracks(updatedPlaylist);
   };
 
-  // Save the playlist
-  const savePlaylist = async () => {
-    try {
-      await handleSavePlaylist(Spotify, playlistName, playlistTracks, setPlaylistName, setPlaylistTracks);
-    } catch (error) {
-      alert('Error saving playlist: ' + error);
+  const updatePlaylistName = (newName) =>
+  {
+    setPlaylistName(newName);
+  };
+
+  const search = async (term) =>
+  {
+    if (!isTokenReady)
+    {
+      console.log('Token not ready. Cannot perform search.');
+      return; // Early return if token is not ready
     }
+    console.log(`Searching for: ${term}`); // Log for debugging
+    const tracks = await Spotify.search(term);
+    console.log(`Search results: ${tracks.length} tracks found`);
+    setSearchResults(tracks);
+  };
+  // Inside your main application component (e.g., App.js)
+  const saveToSpotify = async () =>
+  {
+    const userID = await Spotify.getUserID();
+    const playlistID = await Spotify.createPlaylist(userID, playlistName);
+    const trackURIs = playlistTracks.map((track) => track.uri);
+
+    // Add tracks to the new playlist
+    await Spotify.addTracksToPlaylist(userID, playlistID, trackURIs);
+
+    // Reset the custom playlist in your app
+    setPlaylistName('New Playlist');
+    setPlaylistTracks([]);
   };
 
   return (
     <div className="body">
-      <Header />
-      <div className='search-bar'>
-        <SearchBar 
-          getSearchResults={getSearchResults}
+      <h1 className="header">Jammming</h1>
+      <SearchBar onSearch={search} />
+      <div className="Results">
+        <SearchResults searchResults={searchResults} onAddTrack={addTrack} />
+        <div className='Vr'></div>
+        <Playlist
+          playlistName={playlistName}
+          playlistTracks={playlistTracks}
+          onRemoveTrack={removeTrack}
+          onNameChange={updatePlaylistName}
+          onSavePlaylist={saveToSpotify}
         />
       </div>
-      <div>
-        {searchPerformed ? (
-          <>
-            <div className='search-results'>
-              <SearchResults 
-                results={searchResults}
-                onAdd={addTrack}
-              />
-            </div>
-            <div className='playlist'>
-              <Playlist 
-                name={playlistName}
-                tracks={playlistTracks}
-                onNameChange={updatePlaylistName}
-                onRemove={removeTrack}
-                onSave={savePlaylist}
-              />
-            </div>
-          </>
-        ) : (
-          <div>
-            <h2>
-              Enter a search term to get started!
-            </h2>
-          </div>
-        )}
       </div>
-    </div>
   );
-};
+}
 
 export default App;

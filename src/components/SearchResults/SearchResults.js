@@ -1,49 +1,27 @@
-import React, {useState} from "react";
-import "./SearchResults.css";
+import React from 'react';
+import './SearchResults.css';
+import '../TrackList/TrackList.css';
+import '../Track/Track.css';
 
-const SearchBar = (props) => {
-  // State Variables
-  const [searchQuery, setSearchQuery] = useState("");
-
-  // Function to update search query variable
-  const handleSearchQuery = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  // Function to handle the form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!searchQuery) {
-      alert("Search query is empty!");
-    } else {
-      props.getSearchResults(searchQuery); // Call the getSearchResults function from App.js
-    }
-    setSearchQuery(""); // Reset the search query
-  };
-
-  // Function to handle the enter key press
-  const handleEnterKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSubmit(e);
-    }
-  };
-
+function SearchResults({searchResults, onAddTrack})
+{
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-          <div className="search-results">
-              <input
-                  className="" 
-                  type="text"
-                  placeholder="Search for a song, artist, or album..."
-                  value={searchQuery}
-                  onChange={handleSearchQuery}
-                  onKeyDown={handleEnterKeyPress}
-              />
+    <div className="search-results">
+      <h2>Results</h2>
+      <div className="Tracklist">
+        {searchResults.map((track) => (
+          <div className="Track" key={track.id}>
+            <div className="Track-information">
+              <p><span style={{ fontWeight: 'bold' }}>{track.name}</span> | {track.artist} | {track.album}</p>
+            </div>
+            <button className="Track-action" onClick={() => onAddTrack(track)}>
+              +
+            </button>
           </div>
-      </form>
-    </>
+        ))}
+      </div>
+    </div>
   );
-};
+}
 
-export default SearchBar;
+export default SearchResults;
