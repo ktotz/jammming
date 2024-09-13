@@ -1,16 +1,49 @@
-import React from "react";
-
+import React, {useState} from "react";
 import "./SearchResults.css";
 
-import TrackList from "../TrackList/TrackList";
+const SearchBar = (props) => {
+  // State Variables
+  const [searchQuery, setSearchQuery] = useState("");
 
-const SearchResults = (props) => {
+  // Function to update search query variable
+  const handleSearchQuery = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Function to handle the form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!searchQuery) {
+      alert("Search query is empty!");
+    } else {
+      props.getSearchResults(searchQuery); // Call the getSearchResults function from App.js
+    }
+    setSearchQuery(""); // Reset the search query
+  };
+
+  // Function to handle the enter key press
+  const handleEnterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  };
+
   return (
-    <div className="SearchResults">
-      <h2>Results</h2>
-      <TrackList tracks={props.searchResults} onAdd={props.onAdd} />
-    </div>
+    <>
+      <form onSubmit={handleSubmit}>
+          <div className="search-results">
+              <input
+                  className="" 
+                  type="text"
+                  placeholder="Search for a song, artist, or album..."
+                  value={searchQuery}
+                  onChange={handleSearchQuery}
+                  onKeyDown={handleEnterKeyPress}
+              />
+          </div>
+      </form>
+    </>
   );
 };
 
-export default SearchResults;
+export default SearchBar;

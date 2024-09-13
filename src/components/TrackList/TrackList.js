@@ -1,25 +1,24 @@
 import React from "react";
-
-import "./TrackList.css";
-
 import Track from "../Track/Track";
 
-const TrackList = (props) => {
+const Tracklist = (props) => {
+
   return (
-    <div className="TrackList">
-      {props.tracks.map((track) => {
-        return (
+    <div className="relative py-5 text-white font-light font-['Inter']">
+      {props.tracks.map((track, id) => (
+        <div key={id}>
           <Track
+            key={track.uri}
             track={track}
-            key={track.id}
+            isAdd={props.isAdd}
             onAdd={props.onAdd}
-            isRemoval={props.isRemoval}
             onRemove={props.onRemove}
           />
-        );
-      })}
+          <hr className="my-2 border-t border-gray-500" />
+        </div>
+      ))}
     </div>
   );
 };
 
-export default TrackList;
+export default Tracklist;
