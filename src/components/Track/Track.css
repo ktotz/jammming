@@ -1,22 +1,27 @@
 .Track {
-    background-color: darkgrey;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(256, 256, 256, 0.8);
+    padding: 10px;
+    background-color: #1a1a1a; /* Even darker grey for track background */
+    border-radius: 5px;
+    border: 1px solid #444; /* Light border */
+    transition: background-color 0.3s ease;
   }
   
   .Track-action {
+    background-color: teal;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: 20px;
     cursor: pointer;
-    padding: .5rem;
-    font-size: 1.05rem;
-    transition: color .25s;
-    border: 0px;
-    background-color: rgba(0, 0, 0, 0);
-    color: #fff;
+    transition: background-color 0.3s ease;
   }
   
   .Track-action:hover {
-    color: rgba(265, 265, 265, .5);
+    background-color: #006666; /* Darker teal on hover */
   }
   
   .Track-information {
@@ -32,7 +37,25 @@
   }
   
   .Track-information p {
-    font-size: .83rem;
-    font-weight: 300;
-    color: rgba(256, 256, 256, 0.8);
+      margin: 0;
+      font-size: 16px;
+      color: #f4f4f4;
+      /* Light text color */
   }
+
+  .Track-information span {
+    color: teal; /* Highlight the track name */
+  }
+
+  /* Responsive Design */
+@media (max-width: 768px) {
+  .Track {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .Track-action {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
+}

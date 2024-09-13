@@ -5,21 +5,21 @@ import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import './Playlist.css';
 import '../TrackList/TrackList.css';
 import '../Track/Track.css';
+import '../SearchResults/SearchResults.css';
 
 function Playlist({ playlistName, playlistTracks, onRemoveTrack, onNameChange, onSavePlaylist })
 {
   return (
     <div className="playlist">
       
-      <div className='Input'>
+      <div className='track-item'>
         <input
-
           type="text"
           value={playlistName}
           onChange={(e) => onNameChange(e.target.value)}
         />
       </div>
-      <div className='Playlist-container'>
+      <div className='playlist'>
         
         <TrackList tracks={playlistTracks} onRemoveTrack={onRemoveTrack} />
         <div className='Button-container'>

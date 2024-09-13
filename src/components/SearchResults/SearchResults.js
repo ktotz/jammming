@@ -8,7 +8,7 @@ function SearchResults({searchResults, onAddTrack})
   return (
     <div className="search-results">
       <h2>Results</h2>
-      <div className="Tracklist">
+      <div className="search-container">
         {searchResults.map((track) => (
           <div className="Track" key={track.id}>
             <div className="Track-information">

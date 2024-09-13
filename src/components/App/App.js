@@ -76,9 +76,9 @@ function App()
     <div className="body">
       <h1 className="header">Jammming</h1>
       <SearchBar onSearch={search} />
-      <div className="Results">
+      <div className="container">
         <SearchResults searchResults={searchResults} onAddTrack={addTrack} />
-        <div className='Vr'></div>
+        <br></br>
         <Playlist
           playlistName={playlistName}
           playlistTracks={playlistTracks}
@@ -87,7 +87,7 @@ function App()
           onSavePlaylist={saveToSpotify}
         />
       </div>
-      </div>
+    </div>
   );
 }
 

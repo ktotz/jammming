@@ -4,44 +4,6 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: darkgrey;
-  }
-  
-  /* Main Body Container */
-  .body {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: darkgrey;
-  }
-  
-  /* Save Playlist Button */
-  .playlist button.save-playlist {
-    background-color: teal;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  .playlist button.save-playlist:hover {
-    background-color: #006666;
-  }
-  
-  /* Message */
-  .message h2 {
-    color: grey;
-    text-align: center;
-    margin-top: 50px;
-  }
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
     background-color: #f4f4f4;
   }
   
@@ -62,97 +24,9 @@ body {
     font-weight: bold;
     border-bottom: 2px solid teal;
   }
-  
-  /* Search Results */
-  .search-results {
-    margin: 20px 0;
-  }
-  
-  .search-results h2 {
-    color: teal;
-  }
-  
-  .search-results .result-item {
+
+  .container {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+    gap: 20px;
   }
-  
-  .search-results .result-item button {
-    background-color: teal;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .search-results .result-item button:hover {
-    background-color: #006666;
-  }
-  
-  /* Playlist */
-  .playlist {
-    margin: 20px 0;
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .playlist h2 {
-    color: teal;
-  }
-  
-  .playlist input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .playlist .track-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .playlist .track-item button {
-    background-color: #cc0000;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .playlist .track-item button:hover {
-    background-color: #990000;
-  }
-  
-  /* Save Playlist Button */
-  .playlist button.save-playlist {
-    background-color: teal;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
-  .playlist button.save-playlist:hover {
-    background-color: #006666;
-  }
-  
-  /* Message */
-  .message h2 {
-    color: grey;
-    text-align: center;
-    margin-top: 50px;
-  }
-    

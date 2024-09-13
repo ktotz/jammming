@@ -1,10 +1,11 @@
 /* Playlist */
 .playlist {
-    margin: 20px 0;
-    background-color: darkgrey;
+    background-color: #2e2e2e; /* Dark grey background */
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    color: #f4f4f4; /* Light text color */
+    margin-bottom: 20px;
   }
   
   .playlist h2 {
@@ -27,15 +28,17 @@
     border-bottom: 1px solid #ccc;
   }
   
-  .playlist .track-item button {
-    background-color: #cc0000;
+  /* Save Playlist Button */
+  .playlist button {
+    background-color: teal;
     color: white;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
     cursor: pointer;
+    margin-top: 20px;
   }
   
-  .playlist .track-item button:hover {
-    background-color: #990000;
+  .playlist button:hover {
+    background-color: #006666;
   }

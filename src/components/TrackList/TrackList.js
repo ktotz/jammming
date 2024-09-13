@@ -1,5 +1,6 @@
 import React from 'react';
 import './TrackList.css';
+import '../Track/Track.css';
 
 function TrackList({ tracks, onRemoveTrack })
 {
@@ -11,7 +12,7 @@ function TrackList({ tracks, onRemoveTrack })
           <div className="Track-information">
             <p><span style={{ fontWeight: 'bold' }}>{track.name}</span> | {track.artist} | {track.album}</p>
           </div>
-          <button className="Track-action Track-remove" onClick={() => onRemoveTrack(track)}>
+          <button className="Track-action" onClick={() => onRemoveTrack(track)}>
           -
           </button>
         </div>
